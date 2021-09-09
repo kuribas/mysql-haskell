@@ -113,6 +113,7 @@ mySQLTypeBit            = FieldType 0x10
 mySQLTypeTimestamp2     = FieldType 0x11
 mySQLTypeDateTime2      = FieldType 0x12
 mySQLTypeTime2          = FieldType 0x13
+mySQLTypeJSON           = FieldType 0xf5
 mySQLTypeNewDecimal     = FieldType 0xf6
 mySQLTypeEnum           = FieldType 0xf7
 mySQLTypeSet            = FieldType 0xf8

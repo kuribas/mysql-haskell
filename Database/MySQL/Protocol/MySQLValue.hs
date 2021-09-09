@@ -188,6 +188,7 @@ getTextField f
         || t == mySQLTypeString     = (if isText then MySQLText . T.decodeUtf8 else MySQLBytes) <$> getLenEncBytes
 
     | t == mySQLTypeBit             = MySQLBit <$> (getBits =<< getLenEncInt)
+    | t == mySQLTypeJSON            = (if isText then MySQLText . T.decodeUtf8 else MySQLBytes) <$> getLenEncBytes
 
     | otherwise                     = fail $ "Database.MySQL.Protocol.MySQLValue: missing text decoder for " ++ show t
   where
@@ -372,6 +373,8 @@ getBinaryField f
         || t == mySQLTypeString       = if isText then MySQLText . T.decodeUtf8 <$> getLenEncBytes
                                                   else MySQLBytes <$> getLenEncBytes
     | t == mySQLTypeBit               = MySQLBit <$> (getBits =<< getLenEncInt)
+    | t == mySQLTypeJSON              = if isText then MySQLText . T.decodeUtf8 <$> getLenEncBytes
+                                                  else MySQLBytes <$> getLenEncBytes
     | otherwise                       = fail $ "Database.MySQL.Protocol.MySQLValue:\
                                                \ missing binary decoder for " ++ show t
   where
